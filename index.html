@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 style="font-family: 'Dancing Script', cursive;">Grid Compositie</h1>
+    </header>
+
+    <main class="dashboard">
+        <div id="fetch" class="blok fetch"></div>
+        <div class="blok stopwatch">Stopwatch</div>
+        <div id="formulier" class="blok formulier"></div>  
+    </main>
+
+    <footer>
+        <p>Naam: "Anna-Maria"</p> 
+        <p>Email: <a href="mailto:40987@ma-web.nl">40987@ma-web.nl</a> </p>
+    </footer>
+
+    <script>
+        fetch('formulier.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("formulier").innerHTML = data;
+            });
+
+        function sendForm(){
+
+            const formulier = document.querySelector('.dashboard_form');
+
+            const naam = document.getElementById('naam').value;
+            const email = document.getElementById('email').value;
+            const vak = formulier.querySelector('input[name="vak"]:checked').value;
+            const kleur = document.getElementById('kleur').value;
+            const opmerkingen = document.getElementById('opmerkingen').value;
+            
+            const bericht = `Naam: ${naam} \n Email: ${email}. \n Vak: ${vak} \n Kleur: ${kleur} \n Opmerkingen: ${opmerkingen}`;
+            
+            const maitoAddress = "40987@ma-web.nl";
+            const mailCCAddress = email;
+            const mailSubject = `Formulier ingevuld door ${naam}`;
+            const mailBody = `Beste ${naam}, \n\nBedankt voor het invullen. \n ${bericht}`;
+            
+            const mailtoLink = `mailto:${maitoAddress}?cc=${mailCCAddress}&subject=${encodeURIComponent(mailSubject)}&body= ${encodeURIComponent(mailBody)}`;
+            
+            window.location.href = mailtoLink;
+        }
+
+        fetch('pokemon.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("fetch").innerHTML = data;
+                const searchBtn = document.getElementById("searchBtn");
+                if(searchBtn) {
+                    searchBtn.onclick = fetchPokemon;
+                }
+            });
+
+        async function fetchPokemon() {
+            const input = document.getElementById("pokemonName");
+            const infoPara = document.getElementById("pokemonInfo");
+            const imgElement = document.getElementById("pokemonSprite");
+
+            if(!input.value) return; 
+
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${input.value.toLowerCase()}`);
+                if (!response.ok) throw new Error("Niet gevonden");
+
+                const data = await response.json();
+                infoPara.innerText = `Naam: ${data.name.toUpperCase()} | ID: ${data.id}`;
+                imgElement.src = data.sprites.front_default;
+                imgElement.style.display = "block";
+            } catch (error) {
+                infoPara.innerText = "Fout: " + error.message;
+                imgElement.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+

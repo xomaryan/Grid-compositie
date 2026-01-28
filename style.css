@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    background-color: rgb(247, 233, 254);
+    color: rgb(20, 1, 58);
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    min-height: 100vh; 
+}
+
+header {
+    text-align: center; 
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin: 20px 0;
+}
+footer { 
+    text-align: center; 
+    padding: 20px; 
+}
+
+main.dashboard {
+    grid-row: 2; 
+    background-color: #fbf8fc; 
+    
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px;
+    margin: 20px;
+}
+
+.blok {
+    border-radius: 15px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.fetch {
+    background-color: #ffdafb;
+    grid-column: span 3 / span 3;
+    grid-row: span 1 / span 1;
+    width: 90%; 
+}
+
+.formulier {
+    background-color: #ffdafb;
+    grid-column: span 4 / span 4;
+    grid-row: span 5 / span 5;
+    grid-column-start: 4;
+}
+
+.stopwatch {
+    background-color: #ffdafb;
+    grid-column: span 2 / span 2;
+    grid-row: span 1 / span 1;
+    grid-row-start: 3;
+    grid-column-start: 2;
+}
+
+.form-wrapper input, .form-wrapper select, .form-wrapper textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+
+.submit-btn {
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pokemon-container {
+    text-align: center;
+    color: #14013a;
+}
+
+.pokemon-container input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.pokemon-container button {
+    background-color: #14013a;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pokemonResult {
+    margin-top: 15px;
+}
+
